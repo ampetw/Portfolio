@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Portfolio — Play</title>
+    <meta name="description" content="Graphic design portfolio — Play" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <div class="wrap">
+        <div class="topbar">
+          <nav aria-label="Primary">
+            <a class="navlink" href="index.html">Work</a>
+            <a class="navlink" href="play.html" aria-current="page">Play</a>
+            <a class="navlink" href="about.html">About</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main class="page">
+      <div class="wrap">
+        <section class="panel">
+          <h1>Play</h1>
+          <p>
+            This page is for experiments, sketches, and fun side projects—things that don’t fit the “client work” grid.
+          </p>
+          <p class="hint">
+            Add images/GIFs/videos here, or turn this into another grid like Work (same card component style).
+          </p>
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      <div class="wrap">© <span id="year"></span> Amelie</div>
+    </footer>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
+
