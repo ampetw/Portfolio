@@ -20,27 +20,18 @@
       </div>
     </header>
 
-    <main class="page">
-      <div class="wrap">
-        <section class="panel">
-          <h1>Play</h1>
-          <p>
-            This page is for experiments, sketches, and fun side projects—things that don’t fit the “client work” grid.
+    <main>
+      <section class="grid" aria-label="Play grid">
+        <div class="wrap">
+          <p class="playIntro" data-ripple-text>
+            Fun artistic experiments I like to do outside of studio. Click on the images drag them around!
           </p>
-          <p class="hint">
-            Add images/GIFs/videos here, or turn this into another grid like Work (same card component style).
-          </p>
-        </section>
-      </div>
+          <div class="cards playCards" data-play></div>
+        </div>
+      </section>
     </main>
 
-    <footer>
-      <div class="wrap">© <span id="year"></span> Amelie</div>
-    </footer>
-
-    <script>
-      document.getElementById("year").textContent = new Date().getFullYear();
-    </script>
+    <script src="play.js"></script>
   </body>
 </html>
 
