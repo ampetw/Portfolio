@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 575.2 353.53">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#radial-gradient);
+      }
+
+      .cls-2 {
+        fill: #fff;
+        font-family: ABCArizonaSerifUnlicensedTrial-Regular, 'ABC Arizona Serif Unlicensed Trial';
+        font-size: 28px;
+      }
+
+      .cls-3 {
+        fill: #39b54a;
+      }
+    </style>
+    <radialGradient id="radial-gradient" cx="697.11" cy="1076.12" fx="697.11" fy="1076.12" r="9.74" gradientTransform="translate(1239.85 -692.23) rotate(80.88)" gradientUnits="userSpaceOnUse">
+      <stop offset=".36" stop-color="#f47960"/>
+      <stop offset="1" stop-color="#dd1f26"/>
+    </radialGradient>
+  </defs>
+  <rect class="cls-3" x="188.53" y="149.89" width="166.18" height="120.38" transform="translate(.51 -.65) rotate(.14)"/>
+  <text class="cls-2" transform="translate(234.68 215.99) rotate(.14)"><tspan x="0" y="0">About</tspan></text>
+  <rect x="272.92" y="167.54" width="21.88" height="1.75" transform="translate(-40.18 105.64) rotate(-19.72)"/>
+  <circle class="cls-1" cx="287.77" cy="166.57" r="9.74"/>
+</svg>

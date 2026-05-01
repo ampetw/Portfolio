@@ -3,25 +3,40 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Portfolio — Work</title>
-    <meta name="description" content="Graphic design portfolio — Work" />
+    <title>Portfolio</title>
+    <meta name="description" content="Graphic design portfolio" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <header>
-      <div class="wrap">
-        <div class="topbar">
-          <nav aria-label="Primary">
-            <a class="navlink" href="index.html" aria-current="page">Work</a>
-            <a class="navlink" href="play.html">Play</a>
-            <a class="navlink" href="about.html">About</a>
-          </nav>
-        </div>
-      </div>
-    </header>
-
     <main>
-      <section class="grid" aria-label="Work grid">
+      <section class="homeTop" aria-label="Home navigation">
+        <div class="wrap homeTopInner">
+          <div class="homeStage" role="presentation">
+            <div class="homeName">Amelie Carrillo</div>
+
+            <nav class="miniNav" aria-label="Top navigation">
+              <a class="miniNavLink" href="#workStart">Work</a>
+              <a class="miniNavLink" href="play.html">Play</a>
+              <a class="miniNavLink" href="about.html">About</a>
+            </nav>
+
+            <img class="homeNametag" src="assets/squares/nametag.svg" alt="" />
+            <img class="homeAboutText" src="assets/squares/about.svg" alt="" />
+
+            <a class="homePin homePin--work" href="#workStart" aria-label="Work">
+              <img src="assets/squares/work.svg" alt="" />
+            </a>
+            <a class="homePin homePin--play" href="play.html" aria-label="Play">
+              <img src="assets/squares/play.svg" alt="" />
+            </a>
+            <a class="homePin homePin--resume" href="assets/squares/resume.svg" aria-label="Resume">
+              <img src="assets/squares/resume.svg" alt="" />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="grid" id="workStart" aria-label="Work grid">
         <div class="wrap">
           <div class="cards" data-works></div>
         </div>

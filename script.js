@@ -1,17 +1,20 @@
 const WORKS = [
   {
+    id: "type-specimen",
     title: "Type Specimen",
     tags: ["Typography", "Editorial"],
     href: "assets/works/type-specimen.jpg",
     thumb: "assets/works/type-specimen.jpg",
   },
   {
+    id: "mango-chilimansi",
     title: "Mango Chilimansi Hot Sauce",
     tags: ["Packaging", "Brand Identity"],
     href: "assets/works/mango-chilimansi.png",
     thumb: "assets/works/mango-chilimansi.png",
   },
   {
+    id: "final-102-project",
     title: "Final 102 Project",
     tags: ["Collage", "Layout"],
     href: "assets/works/final-102-project.png",
@@ -19,29 +22,27 @@ const WORKS = [
     thumbAspectRatio: "1024 / 819",
   },
   {
-    title: "Image Brochure",
-    tags: ["Editorial", "Print"],
+    id: "fuse-typeface",
+    title: "Fuse Typeface",
+    tags: ["Typography", "Type Design"],
     href: "assets/works/image-brochure.png",
     thumb: "assets/works/image-brochure.png",
     thumbAspectRatio: "1024 / 768",
-    gridRow: 2,
-    gridColumn: 2,
   },
   {
-    title: "Fuse Typeface",
-    tags: ["Typography", "Type Design"],
-    href: "assets/works/fuse-typeface.png",
-    thumb: "assets/works/fuse-typeface.png",
-    thumbAspectRatio: "768 / 1024",
-    gridRow: 2,
-    gridColumn: 3,
-    offsetY: -160,
-  },
-  {
+    id: "dance-showcase",
     title: "2026 Dance Showcase",
     tags: ["Poster", "Typography"],
     href: "assets/works/showcase.png",
     thumb: "assets/works/showcase.png",
+    thumbAspectRatio: "768 / 1024",
+  },
+  {
+    id: "image-brochure",
+    title: "Image Brochure",
+    tags: ["Editorial", "Print"],
+    href: "assets/works/fuse-typeface.png",
+    thumb: "assets/works/fuse-typeface.png",
     thumbAspectRatio: "768 / 1024",
   },
 ];
@@ -90,10 +91,12 @@ function buildCard(work) {
     );
   }
 
-  const metaChildren = [];
-  if (work.client) metaChildren.push(el("div", { class: "metaTop", text: work.client }));
-  metaChildren.push(el("div", { class: "metaTitle", text: work.title }));
-  const meta = el("div", { class: "meta" }, metaChildren);
+  // Title overlay (shown on hover/focus).
+  thumb.append(
+    el("div", { class: "thumbOverlay", "aria-hidden": "true" }, [
+      el("div", { class: "thumbOverlayTitle", text: work.title }),
+    ])
+  );
 
   const linkAttrs = {
     class: "cardLink",
@@ -109,19 +112,10 @@ function buildCard(work) {
     linkAttrs.onclick = (e) => e.preventDefault();
   }
 
-  const link = el("a", linkAttrs, [thumb, meta]);
+  const link = el("a", linkAttrs, [thumb]);
 
   const cardAttrs = { class: "card" };
-  if (work.gridRow || work.gridColumn) {
-    const parts = [];
-    if (work.gridColumn) parts.push(`grid-column: ${work.gridColumn};`);
-    if (work.gridRow) parts.push(`grid-row: ${work.gridRow};`);
-    cardAttrs.style = parts.join(" ");
-  }
-  if (work.offsetY) {
-    cardAttrs.class += " card--offset";
-    cardAttrs.style = `${cardAttrs.style ? `${cardAttrs.style} ` : ""}--offsetY: ${work.offsetY}px;`;
-  }
+  if (work.id) cardAttrs["data-work-id"] = work.id;
   return el("article", cardAttrs, [link]);
 }
 

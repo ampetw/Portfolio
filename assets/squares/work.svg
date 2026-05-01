@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 575.2 353.53">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #66c5b5;
+      }
+
+      .cls-2 {
+        fill: url(#radial-gradient);
+      }
+
+      .cls-3 {
+        fill: #fff;
+        font-family: ABCArizonaSerifUnlicensedTrial-Regular, 'ABC Arizona Serif Unlicensed Trial';
+        font-size: 28px;
+      }
+
+      .cls-4 {
+        letter-spacing: -.08em;
+      }
+
+      .cls-5 {
+        letter-spacing: -.01em;
+      }
+
+      .cls-6 {
+        letter-spacing: 0em;
+      }
+    </style>
+    <radialGradient id="radial-gradient" cx="457.66" cy="1000.79" fx="457.66" fy="1000.79" r="9.74" gradientTransform="translate(376.89 -899.71) rotate(37.15)" gradientUnits="userSpaceOnUse">
+      <stop offset=".36" stop-color="#f47960"/>
+      <stop offset="1" stop-color="#dd1f26"/>
+    </radialGradient>
+  </defs>
+  <rect class="cls-1" x="49.61" y="170.27" width="166.18" height="120.38" transform="translate(-2.24 1.3) rotate(-.56)"/>
+  <text class="cls-3" transform="translate(94.5 237.57) rotate(-.56)"><tspan class="cls-4" x="0" y="0">W</tspan><tspan x="25.93" y="0">o</tspan><tspan class="cls-6" x="41.44" y="0">r</tspan><tspan class="cls-5" x="52.42" y="0">k</tspan></text>
+  <rect x="124.82" y="177.52" width="21.88" height="1.75" transform="translate(-84.51 220.11) rotate(-63.45)"/>
+  <circle class="cls-2" cx="137.31" cy="174.36" r="9.74"/>
+</svg>

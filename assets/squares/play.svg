@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 575.2 353.53">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#radial-gradient-2);
+      }
+
+      .cls-2 {
+        fill: url(#radial-gradient);
+      }
+
+      .cls-3 {
+        fill: #fff;
+        font-family: ABCArizonaSerifUnlicensedTrial-Regular, 'ABC Arizona Serif Unlicensed Trial';
+        font-size: 28px;
+      }
+
+      .cls-4 {
+        letter-spacing: -.02em;
+      }
+
+      .cls-5 {
+        letter-spacing: -.03em;
+      }
+    </style>
+    <radialGradient id="radial-gradient" cx="453.51" cy="463.25" fx="453.51" fy="463.25" r="72.55" gradientTransform="translate(-114.86 -317.72)" gradientUnits="userSpaceOnUse">
+      <stop offset=".39" stop-color="#77c043"/>
+      <stop offset="1" stop-color="#feee40"/>
+    </radialGradient>
+    <radialGradient id="radial-gradient-2" cx="495.8" cy="-346.19" fx="495.8" fy="-346.19" r="9.74" gradientTransform="translate(73.76 636.23) rotate(-30.3)" gradientUnits="userSpaceOnUse">
+      <stop offset=".36" stop-color="#f47960"/>
+      <stop offset="1" stop-color="#dd1f26"/>
+    </radialGradient>
+  </defs>
+  <rect class="cls-2" x="255.56" y="85.33" width="166.18" height="120.38" transform="translate(.57 -1.31) rotate(.22)"/>
+  <text class="cls-3" transform="translate(312.57 152.14) rotate(.22)"><tspan x="0" y="0">Pl</tspan><tspan class="cls-4" x="24.86" y="0">a</tspan><tspan class="cls-5" x="37.58" y="0">y</tspan></text>
+  <rect x="319.39" y="89.29" width="21.88" height="1.75" transform="translate(478.44 398.89) rotate(-130.9)"/>
+  <circle class="cls-1" cx="327.19" cy="87.19" r="9.74"/>
+</svg>
