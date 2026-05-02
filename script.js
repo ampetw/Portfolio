@@ -68,12 +68,12 @@ const WORKS = [
     id: "project-1-walkthrough",
     title: "Project 1 Walkthrough",
     tags: ["Video"],
-    href: "assets/works/Project 1 Walkthrough.mov",
+    href: "assets/works/Project 1 new.mp4",
     thumbAspectRatio: "16 / 9",
     fullRow: true,
     date: "2026",
     description: "Add a description for this walkthrough video.",
-    images: ["assets/works/Project 1 Walkthrough.mov"],
+    images: ["assets/works/Project 1 new.mp4"],
   },
 ];
 
