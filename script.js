@@ -1,14 +1,14 @@
 const WORKS = [
   {
     id: "type-specimen",
-    title: "Type Specimen",
+    title: "Type Specimen Poster: Didot",
     tags: ["Typography", "Editorial"],
     href: "assets/works/type-specimen.jpg",
     thumb: "assets/works/type-specimen.jpg",
   },
   {
     id: "mango-chilimansi",
-    title: "Mango Chilimansi Hot Sauce",
+    title: "Hot Sauce Labels",
     tags: ["Packaging", "Brand Identity"],
     href: "assets/works/mango-chilimansi.png",
     thumb: "assets/works/mango-chilimansi.png",
@@ -24,7 +24,7 @@ const WORKS = [
   },
   {
     id: "final-102-project",
-    title: "Final 102 Project",
+    title: "Editorial Illustration",
     tags: ["Collage", "Layout"],
     href: "assets/works/final-102-project.png",
     thumb: "assets/works/final-102-project.png",
@@ -32,7 +32,7 @@ const WORKS = [
   },
   {
     id: "fuse-typeface",
-    title: "Fuse Typeface",
+    title: "Museum Brochures",
     tags: ["Typography", "Type Design"],
     href: "assets/works/image-brochure.png",
     thumb: "assets/works/image-brochure.png",
@@ -40,7 +40,7 @@ const WORKS = [
   },
   {
     id: "dance-showcase",
-    title: "2026 Dance Showcase",
+    title: "K-pop Dance Association Branding",
     tags: ["Poster", "Typography"],
     href: "assets/works/showcase.png",
     thumb: "assets/works/showcase.png",
@@ -58,7 +58,7 @@ const WORKS = [
   },
   {
     id: "image-brochure",
-    title: "Image Brochure",
+    title: "Fuse Modular Typeface",
     tags: ["Editorial", "Print"],
     href: "assets/works/fuse-typeface.png",
     thumb: "assets/works/fuse-typeface.png",
@@ -66,7 +66,7 @@ const WORKS = [
   },
   {
     id: "project-1-walkthrough",
-    title: "Project 1 Walkthrough",
+    title: "Website Zine: Me and Music",
     tags: ["Video"],
     href: "assets/works/Project 1 new.mp4",
     thumbPoster: "assets/works/project1.png",
@@ -74,7 +74,8 @@ const WORKS = [
     thumbAspectRatio: "16 / 9",
     fullRow: true,
     date: "2026",
-    description: "Add a description for this walkthrough video.",
+    description:
+      'This webzine explores my personal experiences and interests with music. Click on the different black piano keys to explore fun facts, my music taste, and performances!<br><br><strong>Link to webzine:</strong> <a href="https://project-1-five-hazel.vercel.app/" target="_blank" rel="noopener noreferrer">project-1-five-hazel.vercel.app</a>',
     images: ["assets/works/Project 1 new.mp4"],
   },
 ];
@@ -282,7 +283,7 @@ function setupWorkDetail() {
 
     if (titleEl) titleEl.textContent = work.title;
     if (dateEl) dateEl.textContent = work.date ?? "";
-    if (descEl) descEl.textContent = work.description ?? "Add a description of the work here.";
+    if (descEl) descEl.innerHTML = work.description ?? "Add a description of the work here.";
 
     const images = Array.isArray(work.images) && work.images.length ? work.images : [work.href];
     const uniqueImages = [...new Set(images)];

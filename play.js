@@ -185,7 +185,7 @@ function renderPlay() {
 document.addEventListener("DOMContentLoaded", () => {
   initRippleText();
   renderPlay();
-  // Letter-by-letter animation for the Play title SVG
+  // Letter-by-letter animation for the Play title SVG (redplay)
   const titleSvg = document.querySelector(".playSvgText");
   if (titleSvg) {
     const letters = titleSvg.querySelectorAll("tspan");

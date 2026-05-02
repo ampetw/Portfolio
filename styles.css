@@ -364,8 +364,9 @@ main{ padding-top: 0; }
 }
 .workModalTopTitle{
   font-weight: 700;
-  font-size: 16px;
+  font-size: clamp(22px, 2.4vw, 34px);
   letter-spacing: .01em;
+  line-height: 1.15;
 }
 .workModalClose{
   appearance: none;
@@ -386,6 +387,12 @@ main{ padding-top: 0; }
   align-items: start;
 }
 
+/* Keep body text readable: ~35–65 characters per line (without constraining media) */
+.workMetaDate,
+.workMetaDesc{
+  max-inline-size: 65ch;
+}
+
 /* Viewer mode: media shown below description, wide */
 .workModal--viewer .workModalBody{
   grid-template-columns: 1fr;
@@ -394,16 +401,22 @@ main{ padding-top: 0; }
   display: none;
 }
 .workMetaDate{
-  font-size: 13px;
-  color: rgba(21,24,31,.75);
+  font-size: clamp(14px, 1.2vw, 16px);
+  color: var(--nametagRed);
   margin-bottom: 10px;
   font-weight: 700;
 }
 .workMetaDesc{
-  font-size: 13px;
+  font-size: clamp(16px, 1.35vw, 18px);
   color: rgba(21,24,31,.75);
-  line-height: 1.55;
+  line-height: 1.65;
   margin-bottom: 14px;
+}
+
+.workMetaDesc a{
+  color: var(--nametagRed);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 2px;
 }
 .workModalStack{
   display: grid;
@@ -876,18 +889,19 @@ nav{
   align-items: stretch;
   gap: 1cm;
   grid-auto-flow: dense;
-  margin-top: 1vh;
+  margin-top: 5vh;
 }
 .playHeaderRow{
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 16px;
+  gap: 8px;
   margin: 4vh 0 2vh;
 }
 .playTitleSvg{
   display: block;
-  width: min(640px, 92vw);
+  width: min(1920px, 92vw);
   height: auto;
   margin: 0;
   transform-origin: 30% 60%;
@@ -903,22 +917,24 @@ nav{
   animation: playWiggle 260ms ease-in-out 1;
 }
 
-/* greenplay.svg scoped styles */
-.playTitleSvg .cls-1{ fill:#fff; font-family: ABCArizonaSerifUnlicensedTrial-Regular, 'ABC Arizona Serif Unlicensed Trial'; font-size: 18px; }
-.playTitleSvg .cls-14{ fill:#009444; }
-.playTitleSvg .cls-15{ fill:#39b54a; }
-.playTitleSvg .cls-2{ letter-spacing:-.02em; }
-.playTitleSvg .cls-3{ letter-spacing:-.02em; }
-.playTitleSvg .cls-4{ letter-spacing:-.01em; }
-.playTitleSvg .cls-5{ letter-spacing:-.01em; }
-.playTitleSvg .cls-6{ letter-spacing:-.03em; }
-.playTitleSvg .cls-7{ letter-spacing:-.03em; }
-.playTitleSvg .cls-8{ letter-spacing:0em; }
-.playTitleSvg .cls-9{ letter-spacing:-.01em; }
-.playTitleSvg .cls-10{ letter-spacing:0em; }
-.playTitleSvg .cls-11{ letter-spacing:0em; }
-.playTitleSvg .cls-12{ letter-spacing:0em; }
-.playTitleSvg .cls-13{ letter-spacing:0em; }
+/* redplay.svg uses its own internal SVG styles */
+
+/* Letter-by-letter SVG text reveal on Play (like nametag) */
+.playSvgText .svgLetter{
+  opacity: 0;
+  animation: svgLetterIn 420ms ease forwards;
+  animation-delay: calc(var(--i) * 22ms);
+}
+
+.playTitleLink{
+  display: inline-block;
+}
+
+/* Hover: make the title text yellow */
+.playTitleLink:hover .cls-3{
+  fill: #feee40;
+}
+
 
 .playIntro{
   margin: 6px 0 18px;
