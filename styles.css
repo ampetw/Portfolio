@@ -23,6 +23,8 @@
   --accent: #0b54ff;
   --titleHover: #ff3b22; /* red-orange */
   --nametagRed: #f04e34;
+  /* Custom cursor (@assets/cursor.svg); hotspot ~ center of the 32×32 drawable */
+  --siteCursor: url("assets/cursor.svg") 16 16, auto;
   --cardRadius: 10px;
   --maxW: 1160px;
 }
@@ -32,6 +34,7 @@ html,body{ min-height:100%; }
 html{
   background: #fff;
   scroll-behavior: smooth;
+  cursor: var(--siteCursor);
 }
 body{
   margin:0;
@@ -39,14 +42,15 @@ body{
   min-height: 100vh;
   background: #fff;
   color: var(--text);
-  cursor: url("assets/cursor.svg") 8 8, auto;
 }
 
 a{ color: inherit; text-decoration: none; }
 
-/* Use custom cursor on interactive elements too */
-a, button, [role="button"], .homePin, .miniNavLink, .siteTopNav a{
-  cursor: url("assets/cursor.svg") 8 8, pointer;
+/* Ensure the custom cursor applies everywhere (inherits from <html>). */
+*,
+*::before,
+*::after{
+  cursor: inherit !important;
 }
 
 /* Play page background (match Play card colors) */
@@ -236,7 +240,6 @@ main{ padding-top: 0; }
   justify-content: center;
   width: min(52%, 700px);
   height: auto;
-  cursor: pointer;
   transition: transform 160ms ease;
 }
 .homePin img{
@@ -374,7 +377,6 @@ main{ padding-top: 0; }
   background: transparent;
   font: inherit;
   font-weight: 700;
-  cursor: pointer;
   padding: 6px 8px;
   border-radius: 10px;
 }
@@ -426,14 +428,14 @@ main{ padding-top: 0; }
   width: 100%;
   height: auto;
   display: block;
-  border: 1px solid rgba(21,24,31,.10);
+  border: none;
   background: #fff;
 }
 .workModalStack video{
   width: 100%;
   height: auto;
   display: block;
-  border: 1px solid rgba(21,24,31,.10);
+  border: none;
   background: #fff;
 }
 .workModalRight{
@@ -445,14 +447,14 @@ main{ padding-top: 0; }
   width: 100%;
   height: auto;
   display: block;
-  border: 1px solid rgba(21,24,31,.10);
+  border: none;
   background: #fff;
 }
 .workModalRight video{
   width: 100%;
   height: auto;
   display: block;
-  border: 1px solid rgba(21,24,31,.10);
+  border: none;
   background: #fff;
 }
 
@@ -475,24 +477,33 @@ main{ padding-top: 0; }
 }
 .workCarouselBtn{
   appearance: none;
-  border: 1px solid rgba(21,24,31,.14);
-  background: rgba(255,255,255,.9);
-  border-radius: 999px;
+  border: none;
+  background: transparent;
+  border-radius: 0;
   padding: 8px 12px;
   font: inherit;
   font-weight: 700;
-  cursor: pointer;
+  outline: none;
+  box-shadow: none;
+  -webkit-text-stroke: 0;
+  text-shadow: none;
 }
 .workCarouselBtn:hover{ background: rgba(21,24,31,.06); }
+.workCarouselBtn:focus,
+.workCarouselBtn:focus-visible{
+  outline: none;
+  box-shadow: none;
+}
 .workCarouselCounter{
   font-weight: 700;
   color: rgba(21,24,31,.72);
   font-size: 13px;
+  text-shadow: none;
 }
 .workCarouselViewport{
-  border: 1px solid rgba(21,24,31,.10);
+  border: none;
   background: #fff;
-  border-radius: 14px;
+  border-radius: 0;
   overflow: hidden;
   display: grid;
   place-items: center;
@@ -505,9 +516,13 @@ main{ padding-top: 0; }
   height: auto;
   object-fit: contain;
   display: block;
+  border: none;
+  outline: none;
 }
 .workCarouselPdf{
   height: min(72vh, 760px);
+  border: none;
+  outline: none;
 }
 
 /* Slide transitions */
@@ -543,7 +558,8 @@ main{ padding-top: 0; }
   width: 100%;
   height: min(70vh, 720px);
   display: block;
-  border: 1px solid rgba(21,24,31,.10);
+  border: none;
+  outline: none;
   background: #fff;
 }
 @media (max-width: 860px){
@@ -959,13 +975,9 @@ nav{
 }
 .playItem{
   touch-action: none;
-  cursor: grab;
   will-change: transform;
   position: relative;
   z-index: 1;
-}
-.playItem--dragging{
-  cursor: grabbing;
 }
 .playThumb::after{
   opacity: 0;
