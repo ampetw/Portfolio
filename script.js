@@ -17,8 +17,9 @@ const WORKS = [
       "Add a description of the project here. Include goals, tools, and what you learned.",
     images: [
       "assets/works/mango-chilimansi.png",
-      "assets/works/mango-chilimansi.png",
-      "assets/works/mango-chilimansi.png",
+      "assets/hot sauce/Ghostolatl.jpg",
+      "assets/hot sauce/Mango-Chilimansi-Final.png",
+      "assets/hot sauce/Ghostalatl-Final.png",
     ],
   },
   {
@@ -44,6 +45,16 @@ const WORKS = [
     href: "assets/works/showcase.png",
     thumb: "assets/works/showcase.png",
     thumbAspectRatio: "768 / 1024",
+    date: "2026",
+    description: "Add a description for the KPDA dance showcase project.",
+    images: [
+      "assets/works/showcase.png",
+      "assets/kpda/showcase flyer draft.png",
+      "assets/kpda/shirt mockup 1.png",
+      "assets/kpda/ScreenRecording_04-20-2026-10-22-15_1.mov",
+    ],
+    thumbVideo: "assets/kpda/ScreenRecording_04-20-2026-10-22-15_1.mov",
+    thumbPoster: "assets/works/showcase.png",
   },
   {
     id: "image-brochure",
@@ -52,6 +63,17 @@ const WORKS = [
     href: "assets/works/fuse-typeface.png",
     thumb: "assets/works/fuse-typeface.png",
     thumbAspectRatio: "768 / 1024",
+  },
+  {
+    id: "project-1-walkthrough",
+    title: "Project 1 Walkthrough",
+    tags: ["Video"],
+    href: "assets/works/Project 1 Walkthrough.mov",
+    thumbAspectRatio: "16 / 9",
+    fullRow: true,
+    date: "2026",
+    description: "Add a description for this walkthrough video.",
+    images: ["assets/works/Project 1 Walkthrough.mov"],
   },
 ];
 
@@ -68,17 +90,49 @@ function el(tag, attrs = {}, children = []) {
   return node;
 }
 
+function isVideoSrc(src) {
+  return /\.(mov|mp4|webm)(\?.*)?$/i.test(src || "");
+}
+
+function isPdfSrc(src) {
+  return /\.pdf($|\?)/i.test(src || "");
+}
+
 function buildCard(work) {
   const isExternal = /^https?:\/\//.test(work.href);
   const disabled = work.href === "#";
   const isPdf = !disabled && /\.pdf($|\?)/i.test(work.href);
+  const isVideo = !disabled && isVideoSrc(work.href);
 
   const thumbAttrs = {
     class: `thumb ${work.thumb || isPdf ? "" : "placeholder"} ${work.thumbFit === "contain" ? "thumb--contain" : ""}`,
   };
   if (work.thumbAspectRatio) thumbAttrs.style = `aspect-ratio: ${work.thumbAspectRatio};`;
   const thumb = el("div", thumbAttrs, []);
-  if (work.thumb) {
+  if (work.thumbVideo) {
+    const posterImg = work.thumbPoster
+      ? el("img", { class: "thumbPoster", src: work.thumbPoster, alt: `${work.title} thumbnail`, loading: "lazy" })
+      : null;
+    const vid = el("video", {
+      class: "thumbVideo",
+      src: work.thumbVideo,
+      muted: "true",
+      playsinline: "true",
+      loop: "true",
+      preload: "metadata",
+    });
+    if (work.thumbPoster) vid.setAttribute("poster", work.thumbPoster);
+    // Hover-to-play preview
+    vid.addEventListener("mouseenter", () => {
+      try { vid.play(); } catch {}
+    });
+    vid.addEventListener("mouseleave", () => {
+      vid.pause();
+      try { vid.currentTime = 0; vid.load(); } catch {}
+    });
+    if (posterImg) thumb.append(posterImg);
+    thumb.append(vid);
+  } else if (work.thumb) {
     thumb.append(
       el("img", {
         class: `thumbImg ${work.thumbFit === "contain" ? "thumbImg--contain" : ""}`,
@@ -87,6 +141,24 @@ function buildCard(work) {
         loading: "lazy",
       })
     );
+  } else if (isVideo) {
+    const vid = el("video", {
+      class: "thumbVideo",
+      src: work.href,
+      muted: "true",
+      playsinline: "true",
+      loop: "true",
+      preload: "metadata",
+    });
+    // Hover-to-play preview
+    vid.addEventListener("mouseenter", () => {
+      try { vid.play(); } catch {}
+    });
+    vid.addEventListener("mouseleave", () => {
+      vid.pause();
+      try { vid.currentTime = 0; } catch {}
+    });
+    thumb.append(vid);
   } else if (isPdf) {
     // Browser-native PDF preview (first page visible without clicking).
     // Pointer events are disabled in CSS so the card remains clickable.
@@ -122,7 +194,7 @@ function buildCard(work) {
 
   const link = el("a", linkAttrs, [thumb]);
 
-  const cardAttrs = { class: "card" };
+  const cardAttrs = { class: `card${work.fullRow ? " card--fullRow" : ""}` };
   if (work.id) cardAttrs["data-work-id"] = work.id;
   return el("article", cardAttrs, [link]);
 }
@@ -133,6 +205,20 @@ function renderWorks() {
 
   root.innerHTML = "";
   for (const work of WORKS) root.append(buildCard(work));
+}
+
+function animateSvgLetters(selector) {
+  const root = document.querySelector(selector);
+  if (!root) return;
+
+  const letters = root.querySelectorAll("tspan");
+  let i = 0;
+  for (const tspan of letters) {
+    if (!tspan.textContent || !tspan.textContent.trim()) continue;
+    tspan.classList.add("svgLetter");
+    tspan.style.setProperty("--i", String(i));
+    i += 1;
+  }
 }
 
 function setupWorkDetail() {
@@ -185,17 +271,41 @@ function setupWorkDetail() {
     if (galleryEl) {
       galleryEl.innerHTML = "";
       for (const src of gallery) {
-        galleryEl.append(
-          el("img", { src, alt: work.title, loading: "lazy" }, [])
-        );
+        if (isVideoSrc(src)) {
+          galleryEl.append(
+            el(
+              "video",
+              { src, class: "workMediaVideo", controls: "true", playsinline: "true", preload: "metadata" },
+              []
+            )
+          );
+        } else if (isPdfSrc(src)) {
+          galleryEl.append(
+            el("embed", { src, type: "application/pdf", class: "workMediaPdf" }, [])
+          );
+        } else {
+          galleryEl.append(el("img", { src, alt: work.title, loading: "lazy" }, []));
+        }
       }
     }
     if (stackEl) {
       stackEl.innerHTML = "";
       for (const src of stack) {
-        stackEl.append(
-          el("img", { src, alt: work.title, loading: "lazy" }, [])
-        );
+        if (isVideoSrc(src)) {
+          stackEl.append(
+            el(
+              "video",
+              { src, class: "workMediaVideo", controls: "true", playsinline: "true", preload: "metadata" },
+              []
+            )
+          );
+        } else if (isPdfSrc(src)) {
+          stackEl.append(
+            el("embed", { src, type: "application/pdf", class: "workMediaPdf" }, [])
+          );
+        } else {
+          stackEl.append(el("img", { src, alt: work.title, loading: "lazy" }, []));
+        }
       }
     }
 
@@ -207,5 +317,7 @@ function setupWorkDetail() {
 document.addEventListener("DOMContentLoaded", () => {
   renderWorks();
   setupWorkDetail();
+  animateSvgLetters(".homeNametag.homeSvgText");
+  animateSvgLetters(".homeAboutText.homeSvgText");
 });
 

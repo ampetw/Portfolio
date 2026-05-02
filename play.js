@@ -34,6 +34,27 @@ const PLAY_ITEMS = [
     gridColumn: 1,
     gridRow: 2,
   },
+  {
+    src: "assets/play/portrait.png",
+    alt: "Portrait painting",
+    aspectRatio: "1 / 1",
+    gridColumn: 1,
+    gridRow: 3,
+  },
+  {
+    src: "assets/play/still-life.png",
+    alt: "Still life painting",
+    aspectRatio: "2 / 1",
+    gridColumn: "2 / span 2",
+    gridRow: 3,
+  },
+  {
+    src: "assets/play/pantry.png",
+    alt: "Pantry painting",
+    aspectRatio: "3 / 4",
+    gridColumn: 3,
+    gridRow: 3,
+  },
 ];
 
 function el(tag, attrs = {}, children = []) {
@@ -150,8 +171,6 @@ function renderPlay() {
     thumb.append(img);
 
     const wrapper = el("div", { class: "playItem" }, [thumb]);
-    if (item.gridColumn) wrapper.style.gridColumn = String(item.gridColumn);
-    if (item.gridRow) wrapper.style.gridRow = String(item.gridRow);
     wrapper.dataset.x = "0";
     wrapper.dataset.y = "0";
     wrapper.dataset.baseX = "0";
@@ -166,5 +185,17 @@ function renderPlay() {
 document.addEventListener("DOMContentLoaded", () => {
   initRippleText();
   renderPlay();
+  // Letter-by-letter animation for the Play title SVG
+  const titleSvg = document.querySelector(".playSvgText");
+  if (titleSvg) {
+    const letters = titleSvg.querySelectorAll("tspan");
+    let i = 0;
+    for (const tspan of letters) {
+      if (!tspan.textContent || !tspan.textContent.trim()) continue;
+      tspan.classList.add("svgLetter");
+      tspan.style.setProperty("--i", String(i));
+      i += 1;
+    }
+  }
 });
 
