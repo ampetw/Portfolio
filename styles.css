@@ -385,6 +385,14 @@ main{ padding-top: 0; }
   gap: 18px;
   align-items: start;
 }
+
+/* Viewer mode: media shown below description, wide */
+.workModal--viewer .workModalBody{
+  grid-template-columns: 1fr;
+}
+.workModal--viewer .workModalRight{
+  display: none;
+}
 .workMetaDate{
   font-size: 13px;
   color: rgba(21,24,31,.75);
@@ -433,6 +441,90 @@ main{ padding-top: 0; }
   display: block;
   border: 1px solid rgba(21,24,31,.10);
   background: #fff;
+}
+
+/* Carousel mode (multi-asset works) */
+.workModal--carousel .workModalBody{
+  grid-template-columns: 1fr;
+}
+.workModal--carousel .workModalRight{
+  display: none;
+}
+.workCarousel{
+  display: grid;
+  gap: 10px;
+}
+.workCarouselControls{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.workCarouselBtn{
+  appearance: none;
+  border: 1px solid rgba(21,24,31,.14);
+  background: rgba(255,255,255,.9);
+  border-radius: 999px;
+  padding: 8px 12px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+.workCarouselBtn:hover{ background: rgba(21,24,31,.06); }
+.workCarouselCounter{
+  font-weight: 700;
+  color: rgba(21,24,31,.72);
+  font-size: 13px;
+}
+.workCarouselViewport{
+  border: 1px solid rgba(21,24,31,.10);
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  padding: 10px;
+  min-height: 240px;
+}
+.workCarouselMedia{
+  width: 100%;
+  max-height: min(72vh, 760px);
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+.workCarouselPdf{
+  height: min(72vh, 760px);
+}
+
+/* Slide transitions */
+.workCarouselMedia--enterRight{ animation: enterFromRight 260ms ease both; }
+.workCarouselMedia--enterLeft{ animation: enterFromLeft 260ms ease both; }
+.workCarouselMedia--exitLeft{ animation: exitToLeft 260ms ease both; position: absolute; }
+.workCarouselMedia--exitRight{ animation: exitToRight 260ms ease both; position: absolute; }
+.workCarouselViewport{ position: relative; }
+.workCarouselViewport > .workCarouselMedia{ grid-area: 1 / 1; }
+
+@keyframes enterFromRight{
+  from{ transform: translateX(18px); opacity: 0; }
+  to{ transform: translateX(0px); opacity: 1; }
+}
+@keyframes enterFromLeft{
+  from{ transform: translateX(-18px); opacity: 0; }
+  to{ transform: translateX(0px); opacity: 1; }
+}
+@keyframes exitToLeft{
+  from{ transform: translateX(0px); opacity: 1; }
+  to{ transform: translateX(-18px); opacity: 0; }
+}
+@keyframes exitToRight{
+  from{ transform: translateX(0px); opacity: 1; }
+  to{ transform: translateX(18px); opacity: 0; }
+}
+
+.workViewer{
+  display: grid;
+  gap: 10px;
 }
 .workMediaPdf{
   width: 100%;

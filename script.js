@@ -69,6 +69,8 @@ const WORKS = [
     title: "Project 1 Walkthrough",
     tags: ["Video"],
     href: "assets/works/Project 1 new.mp4",
+    thumbPoster: "assets/works/project1.png",
+    thumbVideo: "assets/works/Project 1 new.mp4",
     thumbAspectRatio: "16 / 9",
     fullRow: true,
     date: "2026",
@@ -234,6 +236,20 @@ function setupWorkDetail() {
   const galleryEl = modal.querySelector("[data-work-modal-gallery]");
   const closeBtn = modal.querySelector("[data-work-modal-close]");
 
+  function buildCarouselMedia(src, titleText) {
+    if (isVideoSrc(src)) {
+      return el(
+        "video",
+        { src, class: "workCarouselMedia", controls: "true", playsinline: "true", preload: "metadata" },
+        []
+      );
+    }
+    if (isPdfSrc(src)) {
+      return el("embed", { src, type: "application/pdf", class: "workCarouselMedia workCarouselPdf" }, []);
+    }
+    return el("img", { src, alt: titleText || "", loading: "lazy", class: "workCarouselMedia" }, []);
+  }
+
   const close = () => {
     overlay.classList.remove("workModalOverlay--open");
     window.setTimeout(() => {
@@ -260,53 +276,73 @@ function setupWorkDetail() {
 
     e.preventDefault();
 
+    // Always use the wide viewer layout (image/video below description).
+    modal.classList.add("workModal--viewer");
+    modal.classList.remove("workModal--carousel");
+
     if (titleEl) titleEl.textContent = work.title;
     if (dateEl) dateEl.textContent = work.date ?? "";
     if (descEl) descEl.textContent = work.description ?? "Add a description of the work here.";
 
     const images = Array.isArray(work.images) && work.images.length ? work.images : [work.href];
-    const gallery = images.slice(0, 2);
-    const stack = images.slice(2);
+    const uniqueImages = [...new Set(images)];
 
-    if (galleryEl) {
-      galleryEl.innerHTML = "";
-      for (const src of gallery) {
-        if (isVideoSrc(src)) {
-          galleryEl.append(
-            el(
-              "video",
-              { src, class: "workMediaVideo", controls: "true", playsinline: "true", preload: "metadata" },
-              []
-            )
-          );
-        } else if (isPdfSrc(src)) {
-          galleryEl.append(
-            el("embed", { src, type: "application/pdf", class: "workMediaPdf" }, [])
-          );
-        } else {
-          galleryEl.append(el("img", { src, alt: work.title, loading: "lazy" }, []));
-        }
-      }
-    }
-    if (stackEl) {
+    if (galleryEl) galleryEl.innerHTML = "";
+
+    // Single-asset: show one wide viewer below description.
+    if (uniqueImages.length <= 1 && stackEl) {
+      const mediaSlot = el("div", { class: "workCarouselViewport" }, [
+        buildCarouselMedia(uniqueImages[0], work.title),
+      ]);
       stackEl.innerHTML = "";
-      for (const src of stack) {
-        if (isVideoSrc(src)) {
-          stackEl.append(
-            el(
-              "video",
-              { src, class: "workMediaVideo", controls: "true", playsinline: "true", preload: "metadata" },
-              []
-            )
-          );
-        } else if (isPdfSrc(src)) {
-          stackEl.append(
-            el("embed", { src, type: "application/pdf", class: "workMediaPdf" }, [])
-          );
+      stackEl.append(el("div", { class: "workViewer" }, [mediaSlot]));
+    }
+
+    // Multi-asset: carousel below description (with slide transition).
+    if (uniqueImages.length > 1 && stackEl) {
+      modal.classList.add("workModal--carousel");
+
+      let idx = 0;
+      const total = uniqueImages.length;
+      const mediaSlot = el("div", { class: "workCarouselViewport" }, []);
+      const counter = el("div", { class: "workCarouselCounter", text: `${idx + 1} / ${total}` }, []);
+
+      const render = (dir) => {
+        const src = uniqueImages[idx];
+        const nextEl = buildCarouselMedia(src, work.title);
+        if (dir === "prev") nextEl.classList.add("workCarouselMedia--enterLeft");
+        if (dir === "next") nextEl.classList.add("workCarouselMedia--enterRight");
+
+        const current = mediaSlot.firstElementChild;
+        if (!current) {
+          mediaSlot.append(nextEl);
         } else {
-          stackEl.append(el("img", { src, alt: work.title, loading: "lazy" }, []));
+          if (dir === "prev") current.classList.add("workCarouselMedia--exitRight");
+          if (dir === "next") current.classList.add("workCarouselMedia--exitLeft");
+          mediaSlot.append(nextEl);
+          window.setTimeout(() => {
+            current.remove();
+            nextEl.classList.remove("workCarouselMedia--enterLeft", "workCarouselMedia--enterRight");
+          }, 260);
         }
-      }
+        counter.textContent = `${idx + 1} / ${total}`;
+      };
+
+      const prevBtn = el("button", { class: "workCarouselBtn", type: "button", text: "Prev" }, []);
+      const nextBtn = el("button", { class: "workCarouselBtn", type: "button", text: "Next" }, []);
+      prevBtn.addEventListener("click", () => {
+        idx = (idx - 1 + total) % total;
+        render("prev");
+      });
+      nextBtn.addEventListener("click", () => {
+        idx = (idx + 1) % total;
+        render("next");
+      });
+
+      const controls = el("div", { class: "workCarouselControls" }, [prevBtn, counter, nextBtn]);
+      stackEl.innerHTML = "";
+      stackEl.append(el("div", { class: "workCarousel" }, [controls, mediaSlot]));
+      render();
     }
 
     overlay.hidden = false;
