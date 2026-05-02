@@ -7,12 +7,12 @@
     <meta name="description" content="Graphic design portfolio" />
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
+  <body id="top">
     <main>
       <section class="homeTop" aria-label="Home navigation">
         <div class="wrap homeTopInner">
           <div class="homeStage" role="presentation">
-            <div class="homeName">Amelie Carrillo</div>
+            <a class="homeName" href="index.html#top">Amelie Carrillo</a>
 
             <nav class="miniNav" aria-label="Top navigation">
               <a class="miniNavLink" href="#workStart">Work</a>
@@ -42,6 +42,27 @@
         </div>
       </section>
     </main>
+
+    <div class="workModalOverlay" hidden data-work-modal-overlay>
+      <div class="workModal" role="dialog" aria-modal="true" aria-label="Work details" data-work-modal>
+        <div class="workModalTop">
+          <div class="workModalTopTitle" data-work-modal-title></div>
+          <button class="workModalClose" type="button" aria-label="Close" data-work-modal-close>Close</button>
+        </div>
+
+        <div class="workModalBody">
+          <div class="workModalLeft">
+            <div class="workMetaDate" data-work-modal-date></div>
+            <div class="workMetaDesc" data-work-modal-desc>
+              Add a description of the work here.
+            </div>
+            <div class="workModalStack" data-work-modal-stack></div>
+          </div>
+
+          <div class="workModalRight" data-work-modal-gallery></div>
+        </div>
+      </div>
+    </div>
 
     <script src="script.js"></script>
   </body>

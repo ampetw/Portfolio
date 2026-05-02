@@ -12,6 +12,14 @@ const WORKS = [
     tags: ["Packaging", "Brand Identity"],
     href: "assets/works/mango-chilimansi.png",
     thumb: "assets/works/mango-chilimansi.png",
+    date: "February 2026",
+    description:
+      "Add a description of the project here. Include goals, tools, and what you learned.",
+    images: [
+      "assets/works/mango-chilimansi.png",
+      "assets/works/mango-chilimansi.png",
+      "assets/works/mango-chilimansi.png",
+    ],
   },
   {
     id: "final-102-project",
@@ -127,7 +135,77 @@ function renderWorks() {
   for (const work of WORKS) root.append(buildCard(work));
 }
 
+function setupWorkDetail() {
+  const grid = document.querySelector("[data-works]");
+  const overlay = document.querySelector("[data-work-modal-overlay]");
+  const modal = document.querySelector("[data-work-modal]");
+  if (!grid || !overlay || !modal) return;
+
+  const titleEl = modal.querySelector("[data-work-modal-title]");
+  const dateEl = modal.querySelector("[data-work-modal-date]");
+  const descEl = modal.querySelector("[data-work-modal-desc]");
+  const stackEl = modal.querySelector("[data-work-modal-stack]");
+  const galleryEl = modal.querySelector("[data-work-modal-gallery]");
+  const closeBtn = modal.querySelector("[data-work-modal-close]");
+
+  const close = () => {
+    overlay.classList.remove("workModalOverlay--open");
+    window.setTimeout(() => {
+      overlay.hidden = true;
+    }, 220);
+  };
+
+  closeBtn?.addEventListener("click", close);
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) close();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !overlay.hidden) close();
+  });
+
+  grid.addEventListener("click", (e) => {
+    const link = e.target.closest("a.cardLink");
+    if (!link) return;
+
+    const card = link.closest(".card");
+    const id = card?.getAttribute("data-work-id");
+    const work = WORKS.find((w) => w.id === id) || WORKS.find((w) => w.href === link.getAttribute("href"));
+    if (!work) return;
+
+    e.preventDefault();
+
+    if (titleEl) titleEl.textContent = work.title;
+    if (dateEl) dateEl.textContent = work.date ?? "";
+    if (descEl) descEl.textContent = work.description ?? "Add a description of the work here.";
+
+    const images = Array.isArray(work.images) && work.images.length ? work.images : [work.href];
+    const gallery = images.slice(0, 2);
+    const stack = images.slice(2);
+
+    if (galleryEl) {
+      galleryEl.innerHTML = "";
+      for (const src of gallery) {
+        galleryEl.append(
+          el("img", { src, alt: work.title, loading: "lazy" }, [])
+        );
+      }
+    }
+    if (stackEl) {
+      stackEl.innerHTML = "";
+      for (const src of stack) {
+        stackEl.append(
+          el("img", { src, alt: work.title, loading: "lazy" }, [])
+        );
+      }
+    }
+
+    overlay.hidden = false;
+    requestAnimationFrame(() => overlay.classList.add("workModalOverlay--open"));
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   renderWorks();
+  setupWorkDetail();
 });
 
