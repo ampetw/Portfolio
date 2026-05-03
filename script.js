@@ -12,6 +12,7 @@ const WORKS = [
     tags: ["Packaging", "Brand Identity"],
     href: "assets/works/mango-chilimansi.png",
     thumb: "assets/works/mango-chilimansi.png",
+    thumbHoverImg: "assets/hot sauce/Ghostolatl.jpg",
     date: "February 2026",
     description:
       "Add a description of the project here. Include goals, tools, and what you learned.",
@@ -68,15 +69,15 @@ const WORKS = [
     id: "project-1-walkthrough",
     title: "Website Zine: Me and Music",
     tags: ["Video"],
-    href: "assets/works/Project 1 new.mp4",
+    href: "assets/works/project1.mp4",
     thumbPoster: "assets/works/project1.png",
-    thumbVideo: "assets/works/Project 1 new.mp4",
+    thumbVideo: "assets/works/project1.mp4",
     thumbAspectRatio: "16 / 9",
     fullRow: true,
     date: "2026",
     description:
       'This webzine explores my personal experiences and interests with music. Click on the different black piano keys to explore fun facts, my music taste, and performances!<br><br><strong>Link to webzine:</strong> <a href="https://project-1-five-hazel.vercel.app/" target="_blank" rel="noopener noreferrer">project-1-five-hazel.vercel.app</a>',
-    images: ["assets/works/Project 1 new.mp4"],
+    images: ["assets/works/project1.mp4"],
   },
 ];
 
@@ -125,16 +126,24 @@ function buildCard(work) {
       preload: "metadata",
     });
     if (work.thumbPoster) vid.setAttribute("poster", work.thumbPoster);
-    // Hover-to-play preview
-    vid.addEventListener("mouseenter", () => {
-      try { vid.play(); } catch {}
-    });
-    vid.addEventListener("mouseleave", () => {
-      vid.pause();
-      try { vid.currentTime = 0; vid.load(); } catch {}
-    });
     if (posterImg) thumb.append(posterImg);
     thumb.append(vid);
+  } else if (work.thumb && work.thumbHoverImg) {
+    thumb.append(
+      el("img", {
+        class: `thumbImg thumbImg--base ${work.thumbFit === "contain" ? "thumbImg--contain" : ""}`,
+        src: work.thumb,
+        alt: `${work.title} thumbnail`,
+        loading: "lazy",
+      }),
+      el("img", {
+        class: `thumbImg thumbHoverImg ${work.thumbFit === "contain" ? "thumbImg--contain" : ""}`,
+        src: work.thumbHoverImg,
+        alt: "",
+        loading: "lazy",
+        "aria-hidden": "true",
+      })
+    );
   } else if (work.thumb) {
     thumb.append(
       el("img", {
@@ -152,14 +161,6 @@ function buildCard(work) {
       playsinline: "true",
       loop: "true",
       preload: "metadata",
-    });
-    // Hover-to-play preview
-    vid.addEventListener("mouseenter", () => {
-      try { vid.play(); } catch {}
-    });
-    vid.addEventListener("mouseleave", () => {
-      vid.pause();
-      try { vid.currentTime = 0; } catch {}
     });
     thumb.append(vid);
   } else if (isPdf) {
@@ -196,6 +197,22 @@ function buildCard(work) {
   }
 
   const link = el("a", linkAttrs, [thumb]);
+
+  const thumbVid = thumb.querySelector("video.thumbVideo");
+  if (thumbVid) {
+    link.addEventListener("mouseenter", () => {
+      try {
+        thumbVid.play();
+      } catch {}
+    });
+    link.addEventListener("mouseleave", () => {
+      thumbVid.pause();
+      try {
+        thumbVid.currentTime = 0;
+        thumbVid.load();
+      } catch {}
+    });
+  }
 
   const cardAttrs = { class: `card${work.fullRow ? " card--fullRow" : ""}` };
   if (work.id) cardAttrs["data-work-id"] = work.id;
