@@ -5,6 +5,9 @@ const WORKS = [
     tags: ["Typography", "Editorial"],
     href: "assets/works/type-specimen.jpg",
     thumb: "assets/works/type-specimen.jpg",
+    date: "September 2025",
+    description:
+      "This poster displays Didot’s typeface anatomy, style variations, character setting, special characters, and history of the typeface. ",
   },
   {
     id: "mango-chilimansi",
@@ -13,9 +16,14 @@ const WORKS = [
     href: "assets/works/mango-chilimansi.png",
     thumb: "assets/works/mango-chilimansi.png",
     thumbHoverImg: "assets/hot sauce/Ghostolatl.jpg",
-    date: "February 2026",
-    description:
-      "Add a description of the project here. Include goals, tools, and what you learned.",
+    id: "mango-chilimansi",
+    title: "Hot Sauce Labels",
+    tags: ["Packaging", "Brand Identity"],
+    href: "assets/works/mango-chilimansi.png",
+    thumb: "assets/works/mango-chilimansi.png",
+    thumbHoverImg: "assets/hot sauce/Ghostolatl.jpg",
+    date: "December 2025",
+    description: "This project includes two hot sauces: Mango Chilimansi (mango, chili, and calamansi) and Ghostolatl (ghost pepper and chocolate). The label is designed to cater to two different audiences: young Filipinos for the spicy Mango Chilimansi and adventourous spice risk takers for Ghostolatl.",
     images: [
       "assets/works/mango-chilimansi.png",
       "assets/hot sauce/Ghostolatl.jpg",
@@ -30,6 +38,9 @@ const WORKS = [
     href: "assets/works/final-102-project.png",
     thumb: "assets/works/final-102-project.png",
     thumbAspectRatio: "1024 / 819",
+    date: "December 2024",
+    description:
+      "This poster displays Didot’s typeface anatomy, style variations, character setting, special characters, and history of the typeface. ",
   },
   {
     id: "fuse-typeface",
@@ -38,6 +49,9 @@ const WORKS = [
     href: "assets/works/image-brochure.png",
     thumb: "assets/works/image-brochure.png",
     thumbAspectRatio: "1024 / 768",
+    date: "November 2025",
+    description:
+      "This poster displays Didot’s typeface anatomy, style variations, character setting, special characters, and history of the typeface. ",
   },
   {
     id: "dance-showcase",
@@ -46,7 +60,7 @@ const WORKS = [
     href: "assets/works/showcase.png",
     thumb: "assets/works/showcase.png",
     thumbAspectRatio: "768 / 1024",
-    date: "2026",
+    date: "April 2026",
     description: "Add a description for the KPDA dance showcase project.",
     images: [
       "assets/works/showcase.png",
@@ -64,6 +78,9 @@ const WORKS = [
     href: "assets/works/fuse-typeface.png",
     thumb: "assets/works/fuse-typeface.png",
     thumbAspectRatio: "768 / 1024",
+    date: "March 2025",
+    description:
+      "This poster displays Didot’s typeface anatomy, style variations, character setting, special characters, and history of the typeface. ",
   },
   {
     id: "project-1-walkthrough",
@@ -74,7 +91,7 @@ const WORKS = [
     thumbVideo: "assets/works/project1.mp4",
     thumbAspectRatio: "16 / 9",
     fullRow: true,
-    date: "2026",
+    date: "February 2026",
     description:
       'This webzine explores my personal experiences and interests with music. Click on the different black piano keys to explore fun facts, my music taste, and performances!<br><br><strong>Link to webzine:</strong> <a href="https://project-1-five-hazel.vercel.app/" target="_blank" rel="noopener noreferrer">project-1-five-hazel.vercel.app</a>',
     images: ["assets/works/project1.mp4"],

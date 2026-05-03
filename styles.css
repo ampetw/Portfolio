@@ -755,6 +755,7 @@ nav{
   border: none;
   aspect-ratio: 3 / 4;
   position: relative;
+  isolation: isolate;
   box-shadow:
     0 20px 45px rgba(0,0,0,.25),
     0 2px 0 rgba(255,255,255,.10) inset;
@@ -765,6 +766,7 @@ nav{
   inset:0;
   background: radial-gradient(800px 320px at 10% 10%, rgba(255,255,255,.12), transparent 60%);
   pointer-events:none;
+  z-index: 1;
 }
 .thumbImg{
   width:100%;
@@ -804,7 +806,7 @@ nav{
   opacity: 0;
   transition: opacity 160ms ease;
   pointer-events: none;
-  z-index: 1;
+  z-index: 2;
 }
 
 .cardLink:hover .thumbVideo,
@@ -828,6 +830,7 @@ nav{
   transition: opacity 180ms ease-in;
   background: linear-gradient(180deg, rgba(0,0,0,0) 45%, rgba(0,0,0,.42) 100%);
   pointer-events:none;
+  z-index: 3;
 }
 .thumbOverlayTitle{
   color: rgba(255,255,255,.92);
@@ -835,6 +838,13 @@ nav{
   font-weight: 700;
   letter-spacing: -.01em;
   text-shadow: 0 10px 30px rgba(0,0,0,.35);
+}
+.cardLink:hover .thumbOverlayTitle,
+.cardLink:focus-visible .thumbOverlayTitle{
+  text-shadow:
+    0 1px 2px rgba(0,0,0,.9),
+    0 2px 12px rgba(0,0,0,.75),
+    0 10px 30px rgba(0,0,0,.45);
 }
 .thumbImg--contain{
   object-fit: contain;
