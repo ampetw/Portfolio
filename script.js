@@ -40,7 +40,7 @@ const WORKS = [
     thumbAspectRatio: "1024 / 819",
     date: "December 2024",
     description:
-      "This poster displays Didot’s typeface anatomy, style variations, character setting, special characters, and history of the typeface. ",
+      "This is an editorial illustration for an article under the New York Times Style Magazine called "Why Are Pants So Big (Again)?"". ",
   },
   {
     id: "fuse-typeface",
