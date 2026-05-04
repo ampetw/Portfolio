@@ -75,7 +75,7 @@ const WORKS = [
     thumbAspectRatio: "768 / 1024",
     date: "March 2025",
     description:
-      "This modular typeface conceptually represents the fusion of the latin alphabet and a traditional Filipino script called baybayin by using modular elements of the translation of "fuse" in baybayin.",
+      'This modular typeface conceptually represents the fusion of the Latin alphabet and a traditional Filipino script called baybayin by using modular elements of the translation of "fuse" in baybayin.',
   },
   {
     id: "project-1-walkthrough",
