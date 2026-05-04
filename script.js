@@ -16,14 +16,9 @@ const WORKS = [
     href: "assets/works/mango-chilimansi.png",
     thumb: "assets/works/mango-chilimansi.png",
     thumbHoverImg: "assets/hot sauce/Ghostolatl.jpg",
-    id: "mango-chilimansi",
-    title: "Hot Sauce Labels",
-    tags: ["Packaging", "Brand Identity"],
-    href: "assets/works/mango-chilimansi.png",
-    thumb: "assets/works/mango-chilimansi.png",
-    thumbHoverImg: "assets/hot sauce/Ghostolatl.jpg",
     date: "December 2025",
-    description: "This project includes two hot sauces: Mango Chilimansi (mango, chili, and calamansi) and Ghostolatl (ghost pepper and chocolate). The label is designed to cater to two different audiences: young Filipinos for the spicy Mango Chilimansi and adventourous spice risk takers for Ghostolatl.",
+    description:
+      "This project includes two hot sauces: Mango Chilimansi (mango, chili, and calamansi) and Ghostolatl (ghost pepper and chocolate). The label is designed to cater to two different audiences: young Filipinos for the spicy Mango Chilimansi and adventurous spice risk takers for Ghostolatl.",
     images: [
       "assets/works/mango-chilimansi.png",
       "assets/hot sauce/Ghostolatl.jpg",
@@ -40,7 +35,7 @@ const WORKS = [
     thumbAspectRatio: "1024 / 819",
     date: "December 2024",
     description:
-      "This is an editorial illustration for an article under the New York Times Style Magazine called "Why Are Pants So Big (Again)?"". ",
+      'This is an editorial illustration for an article under the New York Times Style Magazine called "Why Are Pants So Big (Again)?".',
   },
   {
     id: "fuse-typeface",
@@ -51,7 +46,7 @@ const WORKS = [
     thumbAspectRatio: "1024 / 768",
     date: "November 2025",
     description:
-      "This poster displays Didot’s typeface anatomy, style variations, character setting, special characters, and history of the typeface. ",
+      "These museum brochures showcase three artists: Batia Suter, Petra Stvast, and Martin Parr. Each brochure is designed to highlight the artist's unique style and within a consistent layout.",
   },
   {
     id: "dance-showcase",
@@ -61,7 +56,7 @@ const WORKS = [
     thumb: "assets/works/showcase.png",
     thumbAspectRatio: "768 / 1024",
     date: "April 2026",
-    description: "Add a description for the KPDA dance showcase project.",
+    description: "This project includes the branding for the K-pop Dance Association (KPDA) at the University of Tennessee's annual dance showcase with visual elements inspired by songs Tricky House by Xikers and God's Menu by Stray Kids.",
     images: [
       "assets/works/showcase.png",
       "assets/kpda/showcase flyer draft.png",
@@ -80,7 +75,7 @@ const WORKS = [
     thumbAspectRatio: "768 / 1024",
     date: "March 2025",
     description:
-      "This poster displays Didot’s typeface anatomy, style variations, character setting, special characters, and history of the typeface. ",
+      "This modular typeface conceptually represents the fusion of the latin alphabet and a traditional Filipino script called baybayin by using modular elements of the translation of "fuse" in baybayin.",
   },
   {
     id: "project-1-walkthrough",
