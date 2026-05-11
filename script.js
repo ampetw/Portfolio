@@ -3,8 +3,8 @@ const WORKS = [
     id: "type-specimen",
     title: "Type Specimen Poster: Didot",
     tags: ["Typography", "Editorial"],
-    href: "assets/works/type-specimen.jpg",
-    thumb: "assets/works/type-specimen.jpg",
+    href: "assets/didot.png",
+    thumb: "assets/didot.png",
     date: "September 2025",
     description:
       "This poster displays Didot’s typeface anatomy, style variations, character setting, special characters, and history of the typeface. ",
@@ -22,8 +22,8 @@ const WORKS = [
     images: [
       "assets/works/mango-chilimansi.png",
       "assets/hot sauce/Ghostolatl.jpg",
-      "assets/hot sauce/Mango-Chilimansi-Final.png",
-      "assets/hot sauce/Ghostalatl-Final.png",
+      "assets/hot sauce/New_mango.png",
+      "assets/hot sauce/Ghostalatl Final File.png",
     ],
   },
   {
