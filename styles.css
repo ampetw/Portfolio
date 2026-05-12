@@ -1112,6 +1112,13 @@ nav{
   line-height: 1.25;
   color: rgba(217,75,51,.72);
 }
+.aboutLinks a{
+  display: block;
+  margin-bottom: 10px;
+}
+.aboutLinks a:last-of-type{
+  margin-bottom: 0;
+}
 .aboutLinks a:hover{ text-decoration: underline; }
 .aboutSmiley{
   display: block;
