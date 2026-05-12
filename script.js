@@ -54,6 +54,7 @@ const WORKS = [
       "assets/brochures/stavast.png",
       "assets/brochures/parr.png",
     ],
+    thumbHoverCycleFromImages: true,
   },
   {
     id: "dance-showcase",
@@ -231,6 +232,36 @@ function buildCard(work) {
         thumbVid.load();
       } catch {}
     });
+  }
+
+  const cycleSrcs =
+    work.thumbHoverCycleFromImages &&
+    work.thumb &&
+    Array.isArray(work.images) &&
+    work.images.length > 1
+      ? work.images.filter((src) => !isVideoSrc(src))
+      : null;
+  if (cycleSrcs && cycleSrcs.length > 1) {
+    const cycImg = thumb.querySelector("img.thumbImg");
+    if (cycImg) {
+      let cycleTimer = null;
+      let cycleIdx = 0;
+      link.addEventListener("mouseenter", () => {
+        window.clearInterval(cycleTimer);
+        cycleIdx = 0;
+        const tick = () => {
+          cycleIdx = (cycleIdx + 1) % cycleSrcs.length;
+          cycImg.src = cycleSrcs[cycleIdx];
+        };
+        tick();
+        cycleTimer = window.setInterval(tick, 900);
+      });
+      link.addEventListener("mouseleave", () => {
+        window.clearInterval(cycleTimer);
+        cycleTimer = null;
+        cycImg.src = work.thumb;
+      });
+    }
   }
 
   const cardAttrs = { class: `card${work.fullRow ? " card--fullRow" : ""}` };
