@@ -23,7 +23,7 @@
   --accent: #0b54ff;
   --titleHover: #ff3b22; /* red-orange */
   --nametagRed: #f04e34;
-  /* Custom cursor (@assets/cursor.svg); hotspot ~ center of the 32×32 drawable */
+  /* Default cursor when large star follower is inactive (see cursor-star.js) */
   --siteCursor: url("assets/cursor.svg") 16 16, auto;
   --cardRadius: 10px;
   --maxW: 1160px;
@@ -51,6 +51,38 @@ a{ color: inherit; text-decoration: none; }
 *::before,
 *::after{
   cursor: inherit !important;
+}
+
+/* Larger star follows the pointer (fine pointers only; cursor-star.js toggles class) */
+html.siteCursorStarActive{
+  cursor: none !important;
+}
+html.siteCursorStarActive *,
+html.siteCursorStarActive *::before,
+html.siteCursorStarActive *::after{
+  cursor: none !important;
+}
+#siteCursorStar{
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 2147483000;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.1s ease, transform 0.08s ease;
+}
+#siteCursorStar.siteCursorStar--visible{
+  opacity: 1;
+}
+#siteCursorStar.siteCursorStar--press img{
+  transform: translate(-50%, -50%) scale(0.92);
+}
+#siteCursorStar img{
+  display: block;
+  width: 56px;
+  height: 56px;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.22));
 }
 
 /* Play page background (match Play card colors) */
@@ -443,8 +475,12 @@ main{ padding-top: 0; }
 
 .workMetaDesc a{
   color: var(--nametagRed);
+  text-decoration: underline;
   text-decoration-thickness: 2px;
   text-underline-offset: 2px;
+}
+.workMetaDesc a.workMetaDescLink--zine{
+  font-weight: 700;
 }
 .workModalStack{
   display: grid;

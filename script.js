@@ -78,8 +78,8 @@ const WORKS = [
     id: "image-brochure",
     title: "Fuse Modular Typeface",
     tags: ["Editorial", "Print"],
-    href: "assets/works/fuse-typeface.png",
-    thumb: "assets/works/fuse-typeface.png",
+    href: "assets/modular typeface.png",
+    thumb: "assets/modular typeface.png",
     thumbAspectRatio: "768 / 1024",
     date: "March 2025",
     description:
@@ -96,7 +96,7 @@ const WORKS = [
     fullRow: true,
     date: "February 2026",
     description:
-      'This webzine explores my personal experiences and interests with music. Click on the different black piano keys to explore fun facts, my music taste, and performances!<br><br><strong>Link to webzine:</strong> <a href="https://project-1-five-hazel.vercel.app/" target="_blank" rel="noopener noreferrer">project-1-five-hazel.vercel.app</a>',
+      'This webzine explores my personal experiences and interests with music. Click on the different black piano keys to explore fun facts, my music taste, and performances!<br><br><a class="workMetaDescLink workMetaDescLink--zine" href="https://project-1-five-hazel.vercel.app/" target="_blank" rel="noopener noreferrer">Link to webzine</a>',
     images: ["assets/works/project1.mp4"],
   },
 ];
