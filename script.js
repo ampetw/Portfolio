@@ -47,6 +47,13 @@ const WORKS = [
     date: "November 2025",
     description:
       "These museum brochures showcase three artists: Batia Suter, Petra Stvast, and Martin Parr. Each brochure is designed to highlight the artist's unique style and within a consistent layout.",
+    images: [
+      "assets/works/image-brochure.png",
+      "assets/brochures/3 brochures.png",
+      "assets/brochures/suter.png",
+      "assets/brochures/stavast.png",
+      "assets/brochures/parr.png",
+    ],
   },
   {
     id: "dance-showcase",
