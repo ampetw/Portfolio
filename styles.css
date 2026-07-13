@@ -360,22 +360,39 @@ main{ padding-top: 0; }
   .homeNametag{
     width: min(90vw, 500px);
     margin-top: -6px;
-    margin-bottom: -18px;
+    margin-bottom: -28px;
     transform: rotate(-5deg) scale(1);
   }
 
   .homeAboutText{
     width: min(90vw, 500px);
-    margin-top: -14px;
-    margin-bottom: -16px;
+    margin-top: -22px;
+    margin-bottom: -40px;
     transform: rotate(6deg) scale(1);
   }
 
   .homePin{
     width: min(82vw, 400px);
-    margin-top: -4px;
+    margin-top: -8px;
     margin-bottom: -2px;
     transform: rotate(var(--pin-rot, 0deg));
+  }
+
+  /* Pin squares (work / play / resume): pull together vertically on phone */
+  .homePin--work,
+  .homePin--play{
+    margin-bottom: clamp(-150px, -28vw, -80px);
+  }
+  .homePin--resume{
+    margin-bottom: 2px;
+  }
+
+  .playHeaderRow{
+    margin: 1vh 0 0.5vh;
+  }
+  .playCards{
+    margin-top: 1vh;
+    gap: 0.55cm;
   }
 }
 
