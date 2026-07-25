@@ -327,17 +327,24 @@ main{ padding-top: 0; }
 
 @media (max-width: 680px){
   /* Phones / narrow viewports: header in flow, stack cards with tighter vertical rhythm */
-  .homeTop{ margin-bottom: 0.85in; }
+  .homeTop{
+    min-height: 100svh;
+    margin-bottom: 0.65in;
+    padding-bottom: 12px;
+    box-sizing: border-box;
+  }
 
   .homeStage{
     height: auto;
     max-height: none;
+    min-height: calc(100svh - 20px);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
     gap: 0;
     padding-top: 8px;
+    box-sizing: border-box;
   }
 
   .homeTopRow{
@@ -347,6 +354,7 @@ main{ padding-top: 0; }
     margin: 0 auto 6px;
     padding: 0 6px;
     box-sizing: border-box;
+    flex: 0 0 auto;
   }
 
   .homeName{
@@ -370,36 +378,47 @@ main{ padding-top: 0; }
     left: auto;
     right: auto;
     top: auto;
+    flex: 0 0 auto;
   }
 
   .homeNametag{
-    width: min(90vw, 500px);
-    margin-top: -6px;
-    margin-bottom: -28px;
+    width: min(94vw, 520px);
+    margin-top: -4px;
+    margin-bottom: -52px;
     transform: rotate(-5deg) scale(1);
   }
 
+  /* Keep leftover space above about; pull pins up tight underneath */
   .homeAboutText{
-    width: min(90vw, 500px);
-    margin-top: -22px;
-    margin-bottom: -40px;
-    transform: rotate(6deg) scale(1);
+    width: min(98vw, 560px);
+    margin-top: auto;
+    margin-bottom: -72px;
+    transform: rotate(6deg) scale(1.08);
+    transform-origin: center;
   }
 
   .homePin{
-    width: min(82vw, 400px);
-    margin-top: -8px;
+    width: min(96vw, 520px);
+    margin-top: -10px;
     margin-bottom: -2px;
-    transform: rotate(var(--pin-rot, 0deg));
+    transform: rotate(var(--pin-rot, 0deg)) scale(1.08);
+    transform-origin: center;
   }
 
   /* Pin squares (work / play / resume): pull together vertically on phone */
-  .homePin--work,
+  .homePin--work{
+    margin-top: -88px;
+    margin-bottom: clamp(-175px, -34vw, -105px);
+  }
   .homePin--play{
-    margin-bottom: clamp(-150px, -28vw, -80px);
+    margin-bottom: clamp(-175px, -34vw, -105px);
   }
   .homePin--resume{
     margin-bottom: 2px;
+  }
+
+  .homePin:hover{
+    transform: translateY(-2px) rotate(var(--pin-rot, 0deg)) scale(1.08);
   }
 
   .playHeaderRow{
@@ -408,6 +427,37 @@ main{ padding-top: 0; }
   .playCards{
     margin-top: 1vh;
     gap: 0.55cm;
+  }
+}
+
+/* Extra bump for thin iPhone widths */
+@media (max-width: 430px){
+  .homeNametag{
+    width: min(96vw, 520px);
+    margin-bottom: -56px;
+  }
+
+  .homeAboutText{
+    width: min(100vw, 560px);
+    margin-bottom: -84px;
+    transform: rotate(6deg) scale(1.12);
+  }
+
+  .homePin{
+    width: min(100vw, 560px);
+    transform: rotate(var(--pin-rot, 0deg)) scale(1.14);
+  }
+
+  .homePin--work{
+    margin-top: -100px;
+    margin-bottom: clamp(-190px, -38vw, -120px);
+  }
+  .homePin--play{
+    margin-bottom: clamp(-190px, -38vw, -120px);
+  }
+
+  .homePin:hover{
+    transform: translateY(-2px) rotate(var(--pin-rot, 0deg)) scale(1.14);
   }
 }
 
