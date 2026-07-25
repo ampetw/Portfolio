@@ -1,5 +1,21 @@
 const WORKS = [
   {
+    id: "amelies-world",
+    title: "Music Visualizer: Amelie's World",
+    tags: ["Video"],
+    href: "https://youtu.be/95krtLKLwNE?si=Yp5J7iqW2yT7ARKh",
+    thumb: "assets/works/amelies-world.jpg",
+    thumbPoster: "assets/works/amelies-world.jpg",
+    thumbAspectRatio: "16 / 9",
+    fullRow: true,
+    date: "June 2026",
+    description:
+      "Amelie's World is a music visualizer that explores the emotions I feel based on a curated playlist of some my favorite songs. This workshop was hosted by Ordinary People Studio and the University of Tennessee School of Design.",
+    images: ["https://youtu.be/95krtLKLwNE?si=Yp5J7iqW2yT7ARKh"],
+    youtubePreviewStart: 240,
+    youtubePreviewEnd: 252,
+  },
+  {
     id: "type-specimen",
     title: "Type Specimen Poster: Didot",
     tags: ["Typography", "Editorial"],
@@ -118,6 +134,14 @@ function isVideoSrc(src) {
   return /\.(mov|mp4|webm)(\?.*)?$/i.test(src || "");
 }
 
+function getYoutubeId(src) {
+  if (!src) return null;
+  const match = String(src).match(
+    /(?:youtu\.be\/|youtube\.com\/(?:embed\/|shorts\/|watch\?v=|watch\?.+&v=))([A-Za-z0-9_-]{6,})/i
+  );
+  return match ? match[1] : null;
+}
+
 function isPdfSrc(src) {
   return /\.pdf($|\?)/i.test(src || "");
 }
@@ -127,9 +151,11 @@ function buildCard(work) {
   const disabled = work.href === "#";
   const isPdf = !disabled && /\.pdf($|\?)/i.test(work.href);
   const isVideo = !disabled && isVideoSrc(work.href);
+  const youtubeId = getYoutubeId(work.href) || getYoutubeId(work.images?.[0]);
+  const thumbSrc = work.thumb || work.thumbPoster || (youtubeId ? `https://i.ytimg.com/vi/${youtubeId}/maxresdefault.jpg` : null);
 
   const thumbAttrs = {
-    class: `thumb ${work.thumb || isPdf ? "" : "placeholder"} ${work.thumbFit === "contain" ? "thumb--contain" : ""}`,
+    class: `thumb ${thumbSrc || isPdf ? "" : "placeholder"} ${work.thumbFit === "contain" ? "thumb--contain" : ""}`,
   };
   if (work.thumbAspectRatio) thumbAttrs.style = `aspect-ratio: ${work.thumbAspectRatio};`;
   const thumb = el("div", thumbAttrs, []);
@@ -148,11 +174,20 @@ function buildCard(work) {
     if (work.thumbPoster) vid.setAttribute("poster", work.thumbPoster);
     if (posterImg) thumb.append(posterImg);
     thumb.append(vid);
-  } else if (work.thumb && work.thumbHoverImg) {
+  } else if (youtubeId) {
+    thumb.append(
+      el("img", {
+        class: "thumbPoster",
+        src: thumbSrc || `https://i.ytimg.com/vi/${youtubeId}/maxresdefault.jpg`,
+        alt: `${work.title} thumbnail`,
+        loading: "lazy",
+      })
+    );
+  } else if (thumbSrc && work.thumbHoverImg) {
     thumb.append(
       el("img", {
         class: `thumbImg thumbImg--base ${work.thumbFit === "contain" ? "thumbImg--contain" : ""}`,
-        src: work.thumb,
+        src: thumbSrc,
         alt: `${work.title} thumbnail`,
         loading: "lazy",
       }),
@@ -164,11 +199,11 @@ function buildCard(work) {
         "aria-hidden": "true",
       })
     );
-  } else if (work.thumb) {
+  } else if (thumbSrc) {
     thumb.append(
       el("img", {
         class: `thumbImg ${work.thumbFit === "contain" ? "thumbImg--contain" : ""}`,
-        src: work.thumb,
+        src: thumbSrc,
         alt: `${work.title} thumbnail`,
         loading: "lazy",
       })
@@ -232,6 +267,45 @@ function buildCard(work) {
         thumbVid.load();
       } catch {}
     });
+  }
+
+  if (youtubeId && !work.thumbVideo) {
+    let hoverFrame = null;
+    let hoverTimer = null;
+    const previewStart = Number.isFinite(work.youtubePreviewStart) ? work.youtubePreviewStart : 0;
+    const previewEnd = Number.isFinite(work.youtubePreviewEnd) ? work.youtubePreviewEnd : 12;
+
+    const stopYoutubePreview = () => {
+      window.clearTimeout(hoverTimer);
+      hoverTimer = null;
+      if (hoverFrame) {
+        hoverFrame.remove();
+        hoverFrame = null;
+      }
+    };
+
+    const startYoutubePreview = () => {
+      window.clearTimeout(hoverTimer);
+      hoverTimer = window.setTimeout(() => {
+        if (hoverFrame) return;
+        hoverFrame = el("iframe", {
+          class: "thumbYoutube",
+          src: `https://www.youtube.com/embed/${youtubeId}?autoplay=1&mute=1&controls=0&modestbranding=1&playsinline=1&rel=0&loop=1&playlist=${youtubeId}&start=${previewStart}&end=${previewEnd}`,
+          title: `${work.title} preview`,
+          allow: "autoplay; encrypted-media",
+          frameborder: "0",
+          tabindex: "-1",
+          "aria-hidden": "true",
+        });
+        thumb.append(hoverFrame);
+        requestAnimationFrame(() => hoverFrame?.classList.add("thumbYoutube--visible"));
+      }, 140);
+    };
+
+    link.addEventListener("mouseenter", startYoutubePreview);
+    link.addEventListener("mouseleave", stopYoutubePreview);
+    link.addEventListener("focusin", startYoutubePreview);
+    link.addEventListener("focusout", stopYoutubePreview);
   }
 
   const cycleSrcs =
@@ -305,6 +379,18 @@ function setupWorkDetail() {
   const closeBtn = modal.querySelector("[data-work-modal-close]");
 
   function buildCarouselMedia(src, titleText) {
+    const ytId = getYoutubeId(src);
+    if (ytId) {
+      return el("iframe", {
+        class: "workCarouselMedia workCarouselYoutube",
+        src: `https://www.youtube.com/embed/${ytId}`,
+        title: titleText || "YouTube video",
+        frameborder: "0",
+        allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
+        allowfullscreen: "true",
+        referrerpolicy: "strict-origin-when-cross-origin",
+      });
+    }
     if (isVideoSrc(src)) {
       return el(
         "video",

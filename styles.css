@@ -292,6 +292,7 @@ main{ padding-top: 0; }
   width: 100%;
   height: auto;
   display: block;
+  pointer-events: none;
 }
 .homePin:hover{ transform: translateY(-2px); }
 .homePin:focus-visible{
@@ -305,10 +306,24 @@ main{ padding-top: 0; }
 
 .homePin:hover{ transform: translateY(-2px) rotate(var(--pin-rot, 0deg)); }
 
-/* Pins always live under about.svg */
-.homePin--work{ top: calc(var(--pinsTop) - 1cm); z-index: 2; }
-.homePin--play{ top: calc(var(--pinsTop) + 0.4cm); z-index: 2; }
-.homePin--resume{ top: calc(var(--pinsTop) - 0.2cm); z-index: 2; }
+/* Pins always live under about.svg.
+   Clip hit areas to the visible square in each SVG so transparent
+   canvas regions don't steal clicks from neighboring pins. */
+.homePin--work{
+  top: calc(var(--pinsTop) - 1cm);
+  z-index: 4;
+  clip-path: inset(45% 61% 16% 7%);
+}
+.homePin--play{
+  top: calc(var(--pinsTop) + 0.4cm);
+  z-index: 3;
+  clip-path: inset(20% 25% 40% 43%);
+}
+.homePin--resume{
+  top: calc(var(--pinsTop) - 0.2cm);
+  z-index: 2;
+  clip-path: inset(41% 37% 22% 31%);
+}
 
 @media (max-width: 680px){
   /* Phones / narrow viewports: header in flow, stack cards with tighter vertical rhythm */
@@ -603,6 +618,15 @@ main{ padding-top: 0; }
   border: none;
   outline: none;
 }
+.workCarouselYoutube{
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-height: min(72vh, 760px);
+  height: auto;
+  border: none;
+  outline: none;
+  background: #000;
+}
 
 /* Slide transitions */
 .workCarouselMedia--enterRight{ animation: enterFromRight 260ms ease both; }
@@ -880,6 +904,22 @@ nav{
   transition: opacity 160ms ease;
   position: absolute;
   inset: 0;
+}
+
+.thumbYoutube{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 2;
+  transition: opacity 180ms ease;
+  background: #000;
+}
+.thumbYoutube--visible{
+  opacity: 1;
 }
 
 .thumbPoster{
