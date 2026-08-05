@@ -398,7 +398,7 @@ main{ padding-top: 0; }
   .homeAboutText{
     width: min(98vw, var(--aboutW));
     margin-top: auto;
-    margin-bottom: calc(-84px + (28px * var(--homeGrow)));
+    margin-bottom: calc(-36px + (20px * var(--homeGrow)));
     transform: rotate(6deg) scale(var(--homeScale));
     transform-origin: center;
   }
@@ -412,7 +412,7 @@ main{ padding-top: 0; }
   }
 
   .homePin--work{
-    margin-top: calc(-100px + (24px * var(--homeGrow)));
+    margin-top: calc(-40px + (16px * var(--homeGrow)));
     margin-bottom: calc(-190px + (50px * var(--homeGrow)));
   }
   .homePin--play{
